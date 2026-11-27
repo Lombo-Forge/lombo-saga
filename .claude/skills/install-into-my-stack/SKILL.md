@@ -12,7 +12,7 @@ Ask, one question at a time, and use their answers (never assume a layout):
 3. **Which series belong together?** Write `rules.json` with them. Ask how books are foldered before using `authors`.
 4. **Optional alerts:** a webhook, or leave it empty.
 5. **Write `.env`** from `.env.example`. Keep `LOMBO_SAGA_DRY_RUN=true`.
-6. **Start and check:** `docker compose up -d --build`, then `lombo-saga doctor` inside it.
+6. **Start and check:** `docker compose up -d`, then `lombo-saga doctor` inside it.
 7. **Show `lombo-saga plan`** and fix the rules together, then set `LOMBO_SAGA_DRY_RUN=false` only when they say so.
 
 If `doctor` fails, read the `troubleshoot` skill.

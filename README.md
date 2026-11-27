@@ -57,9 +57,9 @@ The key is the collection's name. `names` are matched against the series name, i
 
 1. In Kavita, copy the API key of an admin account.
 2. Copy `.env.example` to `.env` and `rules.example.json` to `rules.json`, and fill both in.
-3. Build and start it (no image is published yet):
+3. Start it:
    ```sh
-   docker compose -f compose.example.yaml up -d --build
+   docker compose -f compose.example.yaml up -d
    docker compose -f compose.example.yaml exec lombo-saga lombo-saga doctor
    ```
 
