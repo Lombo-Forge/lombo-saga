@@ -9,12 +9,14 @@ Start with `lombo-saga doctor`. Each line says what failed.
 
 | You see | It means | Fix |
 |---|---|---|
-| `[FAIL] settings: LOMBO_SAGA_X ...` (exit 2) | A setting is missing or invalid. The message names it. | Fix that variable in `.env`; restart the container. |
-| `Jellyfin reachable: ... <urlopen error>` | The app cannot reach Jellyfin at that URL. | From inside the container the URL is not the one in your browser. Use the compose service name or the machine's LAN address; check the port and the shared network. |
-| `API key accepted: /System/Info: HTTP 401` | Jellyfin refused the key. | Create a new key (Dashboard, API Keys) and update `.env`. |
-| `HTTP 404` on a path | Your Jellyfin version has no such endpoint. | Check `https://your-server/api-docs/swagger`; adjust `jellyfin.py`. |
-| Doctor is fine but nothing alerts | Dry run is on, the webhook is empty, or `plan` has nothing to report. | Run `plan`. Set `LOMBO_SAGA_DRY_RUN=false` only when ready. Check the webhook line in `doctor`. |
-| `webhook failed` | The webhook URL rejects the message. | Test it with `curl -X POST -H 'Content-Type: application/json' -d '{"content":"test"}' <url>`. |
+| `[FAIL] settings: LOMBO_SAGA_X ...` (exit 2) | A setting is missing or invalid. | Fix it in `.env`; restart. |
+| `rules file ...` | `rules.json` is missing or not valid. | The message says what; compare with `rules.example.json`. |
+| `Kavita ...: HTTP 401` | Wrong API key. | Copy it again. |
+| `... urlopen error` | The URL is not reachable from the container. | Use the service name or LAN address; check the shared network. |
+| `HTTP 301` or `302` | The URL redirects. | Use the final address. |
+| Plan shows nothing | Nothing matches, or it is already in the collection. | Check the series names in Kavita and the folder names for `authors`. |
+| `left alone, 2 collections have this name` | Doubled collection. | Merge or rename one. |
+| `this account is not an admin` | The key is a normal user's. | Use an admin's key. |
 
 Logs: `docker compose logs --tail 100 lombo-saga`. In loop mode a failed round is logged and the next
 one still runs, so look for `[FAIL]` lines. When you report a bug, include `doctor` output with the

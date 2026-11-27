@@ -1,3 +1,3 @@
-"""LomboSaga: a Lombo-Forge app for Jellyfin."""
+"""LomboSaga: keeps Kavita collections for book series filled from your rules."""
 
 __version__ = "0.1.0"
