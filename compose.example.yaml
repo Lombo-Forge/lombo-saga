@@ -1,0 +1,15 @@
+# Drop-in service block. Put it in your own compose file, or run it on its own with:
+#   docker compose -f compose.example.yaml up -d
+services:
+  lombo-saga:
+    image: ghcr.io/lombo-forge/lombo-saga:latest   # or build: .
+    container_name: lombo-saga
+    restart: unless-stopped
+    env_file: .env
+    read_only: true
+    mem_limit: 128m
+    # If Jellyfin is in another compose project, join its network:
+    # networks: [media]
+# networks:
+#   media:
+#     external: true

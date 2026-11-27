@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="300" viewBox="0 0 1200 300" role="img" aria-label="LomboSaga">
+  <defs>
+    <linearGradient id="ember" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ffb347"/><stop offset=".55" stop-color="#ff6a1a"/><stop offset="1" stop-color="#e23d0f"/></linearGradient>
+    <linearGradient id="emberV" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffb347"/><stop offset=".6" stop-color="#ff6a1a"/><stop offset="1" stop-color="#e23d0f"/></linearGradient>
+    <radialGradient id="glow" cx=".18" cy=".5" r=".6"><stop offset="0" stop-color="#ff6a1a" stop-opacity=".28"/><stop offset="1" stop-color="#0d0a08" stop-opacity="0"/></radialGradient>
+  </defs>
+  <rect width="1200" height="300" fill="#0d0a08"/>
+  <rect width="1200" height="300" fill="url(#glow)"/>
+  <rect x="14" y="14" width="1172" height="272" rx="6" fill="none" stroke="#443528"/>
+  <rect x="22" y="22" width="1156" height="256" rx="4" fill="none" stroke="#2c231a"/>
+  <g transform="translate(150 150)">
+    <circle r="80" fill="#1a140f" stroke="url(#ember)" stroke-width="4"/>
+    <circle r="68" fill="none" stroke="#443528"/>
+    <path d="M-48 -48 H-14 V-42 H-22 V22 H40 V40 H-48 V34 H-40 V-42 H-48 Z" fill="url(#emberV)"/>
+    <g fill="url(#emberV)"><path d="M-6 -34 C 4 -40 14 -38 18 -32 V14 C 12 8 2 8 -6 12 Z"/><path d="M46 -34 C 36 -40 26 -38 22 -32 V14 C 28 8 38 8 46 12 Z"/><path d="M31 -37 V-12 L35.5 -17 L40 -12 V-37 Z" fill="#1a140f"/></g>
+  </g>
+  <text x="270" y="118" fill="#b3a696" font-family="Cinzel, Georgia, serif" font-weight="700" font-size="26" letter-spacing="10">LOMBO</text>
+  <text x="266" y="200" font-family="Cinzel, Georgia, serif" font-weight="900" font-size="92" fill="url(#ember)"><tspan font-size="68">S</tspan><tspan font-size="78">A</tspan><tspan font-size="90">G</tspan><tspan font-size="104">A</tspan></text>
+  <text x="270" y="262" fill="#7d7264" font-family="Geist, system-ui, sans-serif" font-size="20">Keeps Kavita collections for book series filled, from rules you write.</text>
+</svg>
