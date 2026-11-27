@@ -49,5 +49,5 @@ SVG text uses fonts the viewer may not have, so the PNG versions are exported wi
 
 - No Tolkien names, scripts, rings or symbols. The feel comes from engraved capitals, a map-style
   frame and the forge colours, not from borrowed imagery.
-- No logos, names or colours of other products. "For Jellyfin" is fine in a description; never
+- No logos, names or colours of other products. "For Kavita" is fine in a description; never
   imply the Jellyfin project or any other product made the app.

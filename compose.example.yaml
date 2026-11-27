@@ -2,13 +2,15 @@
 #   docker compose -f compose.example.yaml up -d
 services:
   lombo-saga:
-    image: ghcr.io/lombo-forge/lombo-saga:latest   # or build: .
+    build: .   # no image is published yet
     container_name: lombo-saga
     restart: unless-stopped
     env_file: .env
     read_only: true
+    volumes:
+      - ./rules.json:/config/rules.json:ro
     mem_limit: 128m
-    # If Jellyfin is in another compose project, join its network:
+    # If Kavita is in another compose project, join its network:
     # networks: [media]
 # networks:
 #   media:

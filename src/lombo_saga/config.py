@@ -16,8 +16,10 @@ class ConfigError(Exception):
 
 @dataclass(frozen=True)
 class Config:
-    jellyfin_url: str
-    jellyfin_api_key: str
+    kavita_url: str
+    kavita_api_key: str
+    rules_file: str
+    promote: bool
     webhook_url: str | None
     dry_run: bool
     interval_seconds: int
@@ -35,17 +37,17 @@ def _truthy(value: str, name: str) -> bool:
 
 def from_env(env: dict[str, str]) -> Config:
     def get(name: str, default: str = "") -> str:
-        return (env.get(PREFIX + name) or default).strip()
+        return (env.get(PREFIX + name) or "").strip() or default
 
-    url = (get("JELLYFIN_URL") or "").strip().rstrip("/")
+    url = get("KAVITA_URL").rstrip("/")
     if urlparse(url).scheme not in {"http", "https"} or not urlparse(url).netloc:
-        raise ConfigError(f"{PREFIX}JELLYFIN_URL must be a full URL such as http://jellyfin:8096 (got {url!r})")
+        raise ConfigError(f"{PREFIX}KAVITA_URL must be a full URL such as http://kavita:5000 (got {url!r})")
 
-    key = (get("JELLYFIN_API_KEY") or "").strip()
-    if not key or key == "changeme":
-        raise ConfigError(f"{PREFIX}JELLYFIN_API_KEY is not set. Create one in Jellyfin: Dashboard > API Keys.")
+    key = get("KAVITA_API_KEY")
+    if key in {"", "changeme"}:
+        raise ConfigError(f"{PREFIX}KAVITA_API_KEY is not set. Copy it from your Kavita account settings.")
 
-    webhook = (get("WEBHOOK_URL") or "").strip() or None
+    webhook = get("WEBHOOK_URL") or None
     if webhook and urlparse(webhook).scheme not in {"http", "https"}:
         raise ConfigError(f"{PREFIX}WEBHOOK_URL must start with http:// or https:// (or be empty)")
 
@@ -56,5 +58,13 @@ def from_env(env: dict[str, str]) -> Config:
     if interval < 60:
         raise ConfigError(f"{PREFIX}INTERVAL_SECONDS must be at least 60")
 
-    # Safe by default: nothing changes anything until the person sets DRY_RUN=false.
-    return Config(url, key, webhook, _truthy(get("DRY_RUN", "true") or "true", "DRY_RUN"), interval)
+    return Config(
+        kavita_url=url,
+        kavita_api_key=key,
+        rules_file=get("RULES_FILE", "/config/rules.json"),
+        promote=_truthy(get("PROMOTE", "true"), "PROMOTE"),
+        webhook_url=webhook,
+        # Safe by default: nothing is changed until the person sets DRY_RUN=false.
+        dry_run=_truthy(get("DRY_RUN", "true"), "DRY_RUN"),
+        interval_seconds=interval,
+    )

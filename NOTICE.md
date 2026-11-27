@@ -3,7 +3,7 @@
 Copyright (C) 2026 Lombo-Forge contributors. Licensed under the GNU General Public License v3.0
 (see [LICENSE](LICENSE)).
 
-Not affiliated with or endorsed by the Jellyfin project. "Jellyfin" is used only to say what this
+Not affiliated with or endorsed by the Kavita project. "Kavita" is used only to say what this
 works with.
 
 ## Credits
