@@ -8,7 +8,8 @@ services:
     env_file: .env
     read_only: true
     volumes:
-      - ./rules.json:/config/rules.json:ro
+      # The folder, not the file: a container keeps reading the old copy of a single mounted file once it is replaced.
+      - ./config:/config:ro
     mem_limit: 128m
     # If Kavita is in another compose project, join its network:
     # networks: [media]

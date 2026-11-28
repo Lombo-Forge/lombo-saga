@@ -42,7 +42,7 @@ Every round (hourly by default) it adds the series that match a rule to that rul
 
 ## Rules
 
-Copy `rules.example.json` to `rules.json`:
+Copy `rules.example.json` to `config/rules.json`:
 
 ```json
 {
@@ -51,12 +51,12 @@ Copy `rules.example.json` to `rules.json`:
 }
 ```
 
-The key is the collection's name. `names` are matched against the series name, ignoring case, with `*` and `?` as wildcards (`[` and `]` are special too). `authors`, if given, must be one of the folders in the book's path, as in `Author/Title/book.epub`. The file is read again every round.
+The key is the collection's name. `names` are matched against the series name, ignoring case, with `*` and `?` as wildcards (`[` and `]` are special too). `authors`, if given, must be one of the folders in the book's path, as in `Author/Title/book.epub`. The file is read again every round. Mount its folder, as `compose.example.yaml` does: a container that mounts only the file keeps reading the old copy after an editor or `git pull` replaces it.
 
 ## Install in a minute
 
 1. In Kavita, copy the API key of an admin account.
-2. Copy `.env.example` to `.env` and `rules.example.json` to `rules.json`, and fill both in.
+2. Copy `.env.example` to `.env` and `rules.example.json` to `config/rules.json`, and fill both in.
 3. Start it:
    ```sh
    docker compose -f compose.example.yaml up -d

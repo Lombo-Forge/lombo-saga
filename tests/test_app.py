@@ -144,3 +144,10 @@ def test_client_and_webhook_failures(fake):
     assert fake.calls[-1]["body"]["content"] == "hello"
     with pytest.raises(notify.NotifyError):
         notify.send("http://127.0.0.1:1/hook", "x", timeout=1)
+
+
+def test_example_compose_mounts_the_rules_folder() -> None:
+    # A single-file mount goes stale when the file is replaced.
+    compose = (Path(__file__).parent.parent / "compose.example.yaml").read_text()
+    assert "./config:/config:ro" in compose
+    assert "rules.json:" not in compose
