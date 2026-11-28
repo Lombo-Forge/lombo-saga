@@ -49,13 +49,15 @@ def test_plan_and_dry_run_change_nothing(env, fake, capsys):
     assert fake.writes() == []
 
 
-def test_live_run_creates_shares_then_only_adds_what_is_new(env, fake):
+def test_live_run_creates_shares_then_only_adds_what_is_new(env, fake, capsys):
     assert main(["run"], {**env, **LIVE}) == 0
     assert fake.members == {1: {1, 2}}
     assert fake.collections[0]["promoted"] is True
+    assert "Nothing to add" not in capsys.readouterr().out
     fake.calls.clear()
     assert main(["run"], {**env, **LIVE}) == 0
     assert fake.writes() == []
+    assert "Nothing to add." in capsys.readouterr().out
     fake.members[1].add(3)  # added by hand: stays
     fake.series.append(book(4, "Red Tower Falls"))
     assert main(["run"], {**env, **LIVE}) == 0
