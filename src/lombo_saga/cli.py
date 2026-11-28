@@ -36,7 +36,7 @@ def run_once(cfg: Config, change: bool) -> int:
     names = {int(s["id"]): str(s.get("name")) for s in series}
     collections = kavita.collections()
     added: list[str] = []
-    failures = 0
+    failures = pending = 0
     for rule in rules:
         try:
             ids = core.wanted(series, rule)
@@ -50,6 +50,7 @@ def run_once(cfg: Config, change: bool) -> int:
             missing = [i for i in ids if i not in current]
             if not missing:
                 continue
+            pending += 1
             verb = "add to" if cid else "create"
             line = f"{rule.title}: +{len(missing)} ({', '.join(names[i] for i in missing)})"
             if not change:
@@ -63,6 +64,8 @@ def run_once(cfg: Config, change: bool) -> int:
         except ApiError as e:
             failures += 1
             print(f"[FAIL] {rule.title}: {e}", file=sys.stderr)
+    if not pending and not failures:
+        print("Nothing to add.")
     if added and cfg.webhook_url:
         notify.send(cfg.webhook_url, "Collections updated:\n" + "\n".join(added)[:1500].replace("@", "@​"))
     return failures
