@@ -9,7 +9,7 @@ Ask, one question at a time, and use their answers (never assume a layout):
 
 1. **How do you run Kavita?** For compose, add the service from `compose.example.yaml` and join its network. Otherwise use the machine's address and port, only in their own `.env`.
 2. **API key:** from an admin account's settings. It has full rights; keep it private.
-3. **Which series belong together?** Write `rules.json` with them. Ask how books are foldered before using `authors`.
+3. **Which series belong together?** Write `config/rules.json` with them. Ask how books are foldered before using `authors`.
 4. **Optional alerts:** a webhook, or leave it empty.
 5. **Write `.env`** from `.env.example`. Keep `LOMBO_SAGA_DRY_RUN=true`.
 6. **Start and check:** `docker compose up -d`, then `lombo-saga doctor` inside it.
